@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import TaskList from './components/TaskList'
+import TaskForm from './components/TaskForm'
 import './App.css'
 
 function App() {
@@ -49,6 +50,11 @@ function App() {
     updateTasks(newTasks)
   }
 
+  function addTask(newTask) {
+    const task = { id: Date.now(), completed: false, ...newTask }
+    updateTasks([...tasks, task])
+  }
+
   if (loading) return <p>Loading...</p>
 
   if (error) {
@@ -63,6 +69,7 @@ function App() {
   return (
     <div className="app">
       <h1>Task Manager</h1>
+      <TaskForm onAdd={addTask} />
       <TaskList tasks={tasks} onToggle={toggleTask} />
     </div>
   )

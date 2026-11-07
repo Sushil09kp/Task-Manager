@@ -14,3 +14,20 @@
   text-decoration: line-through;
   color: gray;
 }
+
+.form-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.form-row input[type='text'] {
+  flex: 1;
+  min-width: 200px;
+}
+
+.error {
+  color: red;
+  margin: 0 0 12px;
+}
