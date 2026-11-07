@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useState } from 'react'
 import { isOverdue } from '../utils/taskHelpers'
 
 function TaskItem({ task, onToggle, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(task.title)
   const [error, setError] = useState('')
+
   const overdue = isOverdue(task)
 
   function startEditing() {
@@ -42,47 +42,58 @@ function TaskItem({ task, onToggle, onEdit, onDelete }) {
     <li className="task-item">
       <input
         type="checkbox"
+        aria-label={`Mark "${task.title}" as completed`}
         checked={task.completed}
         onChange={() => onToggle(task.id)}
       />
 
-      {isEditing ? (
-        <div className="edit-box">
-          <input
-            type="text"
-            className="edit-input"
-            aria-label="Edit task title"
-            value={draft}
-            onChange={(e) => {
-              setDraft(e.target.value)
-              setError('')
-            }}
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
-          {error && <p className="error">{error}</p>}
+      <div className="task-body">
+        {isEditing ? (
+          <div className="edit-box">
+            <input
+              type="text"
+              className="edit-input"
+              aria-label="Edit task title"
+              value={draft}
+              onChange={(e) => {
+                setDraft(e.target.value)
+                setError('')
+              }}
+              onKeyDown={handleKeyDown}
+              autoFocus
+            />
+            {error && <p className="error">{error}</p>}
+          </div>
+        ) : (
+          <span className={task.completed ? 'title done' : 'title'}>
+            {task.title}
+          </span>
+        )}
+
+        <div className="task-meta">
+          <span className={`badge badge-${task.priority.toLowerCase()}`}>
+            {task.priority}
+          </span>
+          <span className="due">{task.dueDate || 'No due date'}</span>
+          {overdue && <span className="overdue">Overdue</span>}
         </div>
-      ) : (
-        <span className={task.completed ? 'title done' : 'title'}>
-          {task.title}
-        </span>
-      )}
+      </div>
 
-      <span className="badge">{task.priority}</span>
-      <span className="due">{task.dueDate || 'No due date'}</span>
-      {overdue && <span className="overdue">Overdue</span>}
-
-      {isEditing ? (
-        <>
-          <button onClick={saveEdit}>Save</button>
-          <button onClick={cancelEdit}>Cancel</button>
-        </>
-      ) : (
-        <>
-          <button onClick={startEditing}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
-        </>
-      )}
+      <div className="task-actions">
+        {isEditing ? (
+          <>
+            <button onClick={saveEdit}>Save</button>
+            <button onClick={cancelEdit}>Cancel</button>
+          </>
+        ) : (
+          <>
+            <button onClick={startEditing}>Edit</button>
+            <button className="btn-delete" onClick={handleDelete}>
+              Delete
+            </button>
+          </>
+        )}
+      </div>
     </li>
   )
 }
