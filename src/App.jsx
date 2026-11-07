@@ -55,6 +55,13 @@ function App() {
     updateTasks([...tasks, task])
   }
 
+  function editTask(id, newTitle) {
+    const newTasks = tasks.map((task) =>
+      task.id === id ? { ...task, title: newTitle } : task
+    )
+    updateTasks(newTasks)
+  }
+
   if (loading) return <p>Loading...</p>
 
   if (error) {
@@ -70,7 +77,7 @@ function App() {
     <div className="app">
       <h1>Task Manager</h1>
       <TaskForm onAdd={addTask} />
-      <TaskList tasks={tasks} onToggle={toggleTask} />
+      <TaskList tasks={tasks} onToggle={toggleTask} onEdit={editTask} />
     </div>
   )
 }

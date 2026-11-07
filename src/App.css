@@ -31,3 +31,11 @@
   color: red;
   margin: 0 0 12px;
 }
+
+.edit-box {
+  flex: 1;
+}
+
+.edit-input {
+  width: 100%;
+}
