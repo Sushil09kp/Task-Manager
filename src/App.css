@@ -63,3 +63,15 @@
   margin: 0;
   color: gray;
 }
+
+.search-sort {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.search-sort input {
+  flex: 1;
+  min-width: 200px;
+}

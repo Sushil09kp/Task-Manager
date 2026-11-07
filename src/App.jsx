@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 import FilterTabs from './components/FilterTabs'
+import SearchSort from './components/SearchSort'
+import { getVisibleTasks } from './utils/taskHelpers'
 import './App.css'
 
 function App() {
@@ -9,6 +11,8 @@ function App() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [filter, setFilter] = useState('all')
+  const [searchText, setSearchText] = useState('')
+  const [sortBy, setSortBy] = useState('none')
 
   function loadTasks() {
     setLoading(true)
@@ -80,18 +84,20 @@ function App() {
     )
   }
 
-  const tasksLeft = tasks.filter((task) => !task.completed).length
+  const visibleTasks = getVisibleTasks(tasks, filter, searchText, sortBy)
 
-  const visibleTasks = tasks.filter((task) => {
-    if (filter === 'active') return !task.completed
-    if (filter === 'completed') return task.completed
-    return true
-  })
+  const tasksLeft = tasks.filter((task) => !task.completed).length
 
   return (
     <div className="app">
       <h1>Task Manager</h1>
       <TaskForm onAdd={addTask} />
+      <SearchSort
+        searchText={searchText}
+        onSearchChange={setSearchText}
+        sortBy={sortBy}
+        onSortChange={setSortBy}
+      />
       <FilterTabs
         filter={filter}
         onFilterChange={setFilter}
