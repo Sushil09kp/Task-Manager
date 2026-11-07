@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
+import FilterTabs from './components/FilterTabs'
 import './App.css'
 
 function App() {
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [filter, setFilter] = useState('all')
 
   function loadTasks() {
     setLoading(true)
@@ -78,12 +80,25 @@ function App() {
     )
   }
 
+  const tasksLeft = tasks.filter((task) => !task.completed).length
+
+  const visibleTasks = tasks.filter((task) => {
+    if (filter === 'active') return !task.completed
+    if (filter === 'completed') return task.completed
+    return true
+  })
+
   return (
     <div className="app">
       <h1>Task Manager</h1>
       <TaskForm onAdd={addTask} />
+      <FilterTabs
+        filter={filter}
+        onFilterChange={setFilter}
+        tasksLeft={tasksLeft}
+      />
       <TaskList
-        tasks={tasks}
+        tasks={visibleTasks}
         onToggle={toggleTask}
         onEdit={editTask}
         onDelete={deleteTask}

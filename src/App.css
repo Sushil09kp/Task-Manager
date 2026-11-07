@@ -39,3 +39,27 @@
 .edit-input {
   width: 100%;
 }
+
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.tab.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.counter,.empty {
+  margin: 0;
+  color: gray;
+}

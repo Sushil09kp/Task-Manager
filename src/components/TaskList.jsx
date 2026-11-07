@@ -1,6 +1,10 @@
 import TaskItem from './TaskItem'
 
 function TaskList({ tasks, onToggle, onEdit, onDelete }) {
+  if (tasks.length === 0) {
+    return <p className="empty">No tasks to show.</p>
+  }
+
   return (
     <ul className="task-list">
       {tasks.map((task) => (
