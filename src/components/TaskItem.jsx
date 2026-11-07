@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function TaskItem({ task, onToggle, onEdit }) {
+function TaskItem({ task, onToggle, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(task.title)
   const [error, setError] = useState('')
@@ -28,6 +28,11 @@ function TaskItem({ task, onToggle, onEdit }) {
   function handleKeyDown(e) {
     if (e.key === 'Enter') saveEdit()
     if (e.key === 'Escape') cancelEdit()
+  }
+
+  function handleDelete() {
+    const sure = window.confirm(`Delete "${task.title}"?`)
+    if (sure) onDelete(task.id)
   }
 
   return (
@@ -69,7 +74,10 @@ function TaskItem({ task, onToggle, onEdit }) {
           <button onClick={cancelEdit}>Cancel</button>
         </>
       ) : (
-        <button onClick={startEditing}>Edit</button>
+        <>
+          <button onClick={startEditing}>Edit</button>
+          <button onClick={handleDelete}>Delete</button>
+        </>
       )}
     </li>
   )

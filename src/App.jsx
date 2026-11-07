@@ -62,6 +62,11 @@ function App() {
     updateTasks(newTasks)
   }
 
+  function deleteTask(id) {
+    const newTasks = tasks.filter((task) => task.id !== id)
+    updateTasks(newTasks)
+  }
+
   if (loading) return <p>Loading...</p>
 
   if (error) {
@@ -77,7 +82,12 @@ function App() {
     <div className="app">
       <h1>Task Manager</h1>
       <TaskForm onAdd={addTask} />
-      <TaskList tasks={tasks} onToggle={toggleTask} onEdit={editTask} />
+      <TaskList
+        tasks={tasks}
+        onToggle={toggleTask}
+        onEdit={editTask}
+        onDelete={deleteTask}
+      />
     </div>
   )
 }
