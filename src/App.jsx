@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import TaskList from './components/TaskList'
 import './App.css'
 
 function App() {
@@ -36,6 +37,18 @@ function App() {
     loadTasks()
   }, [])
 
+  function updateTasks(newTasks) {
+    setTasks(newTasks)
+    localStorage.setItem('tasks', JSON.stringify(newTasks))
+  }
+
+  function toggleTask(id) {
+    const newTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    )
+    updateTasks(newTasks)
+  }
+
   if (loading) return <p>Loading...</p>
 
   if (error) {
@@ -48,9 +61,9 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="app">
       <h1>Task Manager</h1>
-      <p>{tasks.length} tasks loaded</p>
+      <TaskList tasks={tasks} onToggle={toggleTask} />
     </div>
   )
 }
