@@ -1,9 +1,12 @@
 import { useState } from 'react'
+import { useState } from 'react'
+import { isOverdue } from '../utils/taskHelpers'
 
 function TaskItem({ task, onToggle, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false)
   const [draft, setDraft] = useState(task.title)
   const [error, setError] = useState('')
+  const overdue = isOverdue(task)
 
   function startEditing() {
     setDraft(task.title)
@@ -67,6 +70,7 @@ function TaskItem({ task, onToggle, onEdit, onDelete }) {
 
       <span className="badge">{task.priority}</span>
       <span className="due">{task.dueDate || 'No due date'}</span>
+      {overdue && <span className="overdue">Overdue</span>}
 
       {isEditing ? (
         <>

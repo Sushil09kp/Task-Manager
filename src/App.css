@@ -75,3 +75,12 @@
   flex: 1;
   min-width: 200px;
 }
+
+.overdue {
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
