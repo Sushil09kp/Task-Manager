@@ -4,6 +4,7 @@ import TaskForm from './components/TaskForm'
 import FilterTabs from './components/FilterTabs'
 import SearchSort from './components/SearchSort'
 import { getVisibleTasks } from './utils/taskHelpers'
+import DashboardSummary from './components/DashboardSummary'
 import './App.css'
 
 function App() {
@@ -41,7 +42,9 @@ function App() {
   }
 
   useEffect(() => {
+  Promise.resolve().then(() => {
     loadTasks()
+  })
   }, [])
 
   function updateTasks(newTasks) {
@@ -89,28 +92,41 @@ function App() {
   const tasksLeft = tasks.filter((task) => !task.completed).length
 
   return (
-    <div className="app">
-      <h1>Task Manager</h1>
-      <TaskForm onAdd={addTask} />
-      <SearchSort
-        searchText={searchText}
-        onSearchChange={setSearchText}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-      />
-      <FilterTabs
-        filter={filter}
-        onFilterChange={setFilter}
-        tasksLeft={tasksLeft}
-      />
-      <TaskList
-        tasks={visibleTasks}
-        onToggle={toggleTask}
-        onEdit={editTask}
-        onDelete={deleteTask}
-      />
-    </div>
-  )
+  <div className="app">
+    <header className="app-header">
+      <div>
+        <h1>TaskNova</h1>
+        <p className="app-subtitle">
+          Plan smarter. Achieve more.
+        </p>
+      </div>
+    </header>
+
+    <DashboardSummary tasks={tasks} />
+
+    <TaskForm onAdd={addTask} />
+
+    <SearchSort
+      searchText={searchText}
+      onSearchChange={setSearchText}
+      sortBy={sortBy}
+      onSortChange={setSortBy}
+    />
+
+    <FilterTabs
+      filter={filter}
+      onFilterChange={setFilter}
+      tasksLeft={tasksLeft}
+    />
+
+    <TaskList
+      tasks={visibleTasks}
+      onToggle={toggleTask}
+      onEdit={editTask}
+      onDelete={deleteTask}
+    />
+  </div>
+)
 }
 
 export default App

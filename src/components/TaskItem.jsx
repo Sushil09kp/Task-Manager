@@ -39,7 +39,7 @@ function TaskItem({ task, onToggle, onEdit, onDelete }) {
   }
 
   return (
-    <li className="task-item">
+    <li className={`task-item priority-${task.priority.toLowerCase()}`}>
       <input
         type="checkbox"
         aria-label={`Mark "${task.title}" as completed`}
