@@ -1,25 +1,31 @@
-Task Manager
+# TaskNova – Task Manager
 
-A simple and responsive Task Manager application built using React and Vite.
+TaskNova is a responsive task management app built with React and Vite. It helps users keep track of tasks, set priorities and due dates, and manage their progress.
 
-Organize your tasks, manage priorities, set due dates, and track your progress.
+## Live Demo
 
-Features
+[Open TaskNova](https://task-manager-ashy-mu-14.vercel.app)
 
-- Load starter tasks from a JSON file.
-- Save tasks in browser localStorage.
-- Add tasks with title, priority, and optional due date.
+## GitHub Repository
+
+[View Source Code](https://github.com/Sushil09kp/Task-Manager)
+
+## Features
+
+- Load initial tasks from `public/tasks.json`.
+- Save task data in browser `localStorage`.
+- Add tasks with a title, priority, and optional due date.
+- Edit task titles inline.
 - Mark tasks as completed or active.
-- Edit task titles directly in the task list.
 - Delete tasks with confirmation.
 - Filter tasks by All, Active, and Completed.
 - Search tasks by title.
 - Sort tasks by due date or priority.
-- Display overdue tasks.
-- Show remaining incomplete task count.
+- Highlight overdue tasks.
+- Show task counts and completion progress.
 - Responsive layout for desktop and mobile screens.
 
-Technologies Used
+## Tech Stack
 
 - React
 - JavaScript
@@ -28,35 +34,42 @@ Technologies Used
 - CSS
 - Browser localStorage
 
-How to Run
+## Getting Started
 
-1. Clone the repository:
-   
-   git clone https://github.com/Sushil09kp/Task-Manager.git
+### Prerequisites
 
-2. Open the project folder:
-   
-   cd Task-Manager
+Install Node.js and npm before running the project.
 
-3. Install dependencies:
-   
-   npm install
+### Installation
 
-4. Start the development server:
-   
-   npm run dev
+```bash
+git clone https://github.com/Sushil09kp/Task-Manager.git
+cd Task-Manager
+npm install
+npm run dev
+```
 
-5. Open the application in your browser:
-   
-   "http://localhost:5173"
+Open the local URL shown in the terminal, usually `http://localhost:5173`.
 
-Project Structure
+## Production Build
 
+To create a production build, run:
+
+```bash
+npm run build
+```
+
+The generated files will be available in the `dist` folder.
+
+## Project Structure
+
+```text
 Task-Manager/
 ├── public/
 │   └── tasks.json
 ├── src/
 │   ├── components/
+│   │   ├── DashboardSummary.jsx
 │   │   ├── FilterTabs.jsx
 │   │   ├── SearchSort.jsx
 │   │   ├── TaskForm.jsx
@@ -70,43 +83,34 @@ Task-Manager/
 │   └── main.jsx
 ├── package.json
 └── README.md
+```
 
 ## Testing
 
-The application was manually tested in Chrome.
+I manually checked the main task workflows in Chrome, including:
 
-- Task creation, editing, deletion, and completion.
-- Filtering and searching.
-- Due date and priority sorting.
-- Overdue task detection.
-- localStorage persistence.
-- Desktop and mobile responsive layout.
+- Adding, editing, deleting, and completing tasks.
+- Filtering and searching tasks.
+- Sorting by due date and priority.
+- Checking overdue task indicators.
+- Refreshing the page to verify saved tasks.
+- Checking the layout on desktop and mobile screen sizes.
 
-## Assumptions
+## Notes
 
-- Tasks are stored in browser localStorage after the initial load.
-- Starter tasks are loaded from `public/tasks.json` when no saved tasks exist.
-- Tasks remain stored locally in the browser.
-- A task due today is not considered overdue.
-- Overdue status is calculated using the local computer date.
-- Delete confirmation uses the browser's native confirmation dialog.
-- The remaining task counter includes all incomplete tasks, regardless of active filters or search.
+- Initial tasks are loaded from `public/tasks.json` when there is no saved task data.
+- After that, task changes are stored in browser `localStorage`.
+- Tasks due today are not marked as overdue.
+- Overdue status is calculated using the computer's local date.
+- The remaining task count includes all incomplete tasks, regardless of the selected filter or search.
+- Task data is stored in the current browser and is not synced across devices.
 
 ## Limitations
 
-- No backend or database.
-- No user authentication.
-- No automated tests.
-- No undo delete functionality.
-- No theme switcher.
-- No deployed production URL.
+This is a frontend-only project. It does not include a backend, database, authentication, or automated tests.
 
-## Development Notes
+## About
 
-This project was developed as a frontend assignment.
+Created by **Susil Kumar Pradhan** as a Front End React Intern assignment for **HyperApps Technologies**.
 
-I used AI assistance as a learning and debugging resource and reviewed the implementation to understand the code and functionality.
-
-## Time Spent
-
-Approximately [ADD YOUR ACTUAL HOURS] hours.
+AI tools were used for learning and debugging support during development. I reviewed the implementation and worked through the application features during development.
